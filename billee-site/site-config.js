@@ -9,8 +9,8 @@ window.SITE_CONFIG = {
   // Rotating rover video (left side of the home section).
   // Drop your file at assets/rover.mp4 (a .webm also works).
   // Set to "" to show the placeholder box instead.
-  roverVideo: "assets/rover.mp4",
-  roverVideoPoster: "assets/rover-poster.jpg", // optional still frame shown before the video loads
+  roverVideo: "assets/rover-exploded.mp4",
+  roverVideoPoster: "assets/rover-exploded-poster.jpg", // optional still frame shown before the video loads
 
   // Big background behind the logo / home section
   heroBackground: "assets/hero-bg.jpg",
