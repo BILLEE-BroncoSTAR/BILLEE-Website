@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BILL-EE Robotics | Cal Poly Pomona</title>
+  <meta name="description" content="BILL-EE is a team of undergraduate STEM students at Cal Poly Pomona building a rover for the University Rover Challenge." />
+  <meta name="theme-color" content="#05050a" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ============ TOP BAR (logo, menu, Instagram links) ============ -->
+  <header class="topbar" id="topbar">
+    <a class="tb-brand" href="#home" aria-label="BILL-EE home">
+      <img class="tb-logo" src="assets/logo.png" alt="" data-fallback="hide" />
+      <span class="tb-word">BILL-EE</span>
+    </a>
+
+    <nav class="tb-nav" id="nav" aria-label="Main">
+      <ul id="navList">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#rover">Rover</a></li>
+        <li><a href="#team">Our Team</a></li>
+        <li><a href="#urc">URC</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#contact">Join</a></li>
+      </ul>
+    </nav>
+
+    <div class="tb-social">
+      <a class="ig" data-link="instagramBillee" href="#" target="_blank" rel="noopener" aria-label="BILL-EE on Instagram, @cppbilleerover" title="@cppbilleerover">
+        <img class="ig-av" src="assets/logo.png" alt="" data-fallback="hide" />
+        <span>BILL-EE</span>
+        <svg class="ig-ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      </a>
+      <a class="ig" data-link="instagramBroncoStar" href="#" target="_blank" rel="noopener" aria-label="Bronco STAR on Instagram, @broncostar.cpp" title="@broncostar.cpp">
+        <img class="ig-av" src="assets/bronco-star-logo.png" alt="" data-fallback="hide" />
+        <span>Bronco STAR</span>
+        <svg class="ig-ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      </a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navList">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ============ HOME ============ -->
+  <section id="home" class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="mars" aria-hidden="true">
+      <svg class="mars-far" viewBox="0 0 1440 300" preserveAspectRatio="none"><path d="M0,300 L0,170 C120,120 220,170 340,140 C470,105 560,60 700,110 C830,155 930,80 1060,100 C1190,120 1300,60 1440,110 L1440,300 Z" fill="#4a2a30"/></svg>
+      <svg class="mars-near" viewBox="0 0 1440 300" preserveAspectRatio="none"><path d="M0,300 L0,210 C160,170 280,230 430,200 C590,165 700,215 860,190 C1020,165 1180,230 1440,180 L1440,300 Z" fill="#2c1820"/></svg>
+    </div>
+
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <div class="hero-inner container">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="bar"></span>Cal Poly Pomona &middot; Bronco STAR</p>
+        <h1 class="hero-title">
+          <span class="sr-only">BILL-EE Robotics. </span>
+          <span class="ht-main" aria-hidden="true">BILL-EE</span>
+          <span class="ht-sub" aria-hidden="true">Cal Poly Pomona&rsquo;s University Rover Challenge team</span>
+        </h1>
+
+        <h2 class="about-title"><span class="chip"></span>ABOUT BILL-EE</h2>
+        <p>We are an enthusiastic team of undergraduate STEM students from Cal Poly Pomona, with a fascination for space robotics and rover engineering. Our team includes individuals from various disciplines, while the majority are Electrical, Aerospace, and Mechanical Engineering.</p>
+        <p>We're proud to be part of Bronco Space, Cal Poly Pomona's renowned Space Exploration Club. This collaboration enriches our experience, as we receive guidance and insights from esteemed faculty members in the Engineering field. Together, we're not just exploring possibilities; we're paving new paths in space exploration and technology.</p>
+        <div class="btn-row">
+          <a class="btn" data-link="joinForm" href="#contact" target="_blank" rel="noopener">Join Us Now</a>
+          <a class="btn ghost" href="#rover">Meet the Rover</a>
+          <a class="btn ghost" id="heroSar" href="#sar" hidden>Watch our SAR video</a>
+        </div>
+      </div>
+
+      <div class="emblem" role="img" aria-label="BILL-EE logo inside orbit rings, with the Bronco STAR logo">
+        <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+        <span class="orbit o1"><i></i></span><span class="orbit o2"><i></i></span>
+        <img class="logo" src="assets/logo.png" alt="" data-fallback="wordmark" data-wordmark="BILL-EE" />
+        <span class="sat"><img src="assets/bronco-star-logo.png" alt="" data-fallback="hide-fig" /></span>
+      </div>
+    </div>
+
+    <ul class="stats container" aria-label="At a glance">
+      <li><b>4</b><span>URC missions</span></li>
+      <li><b>3</b><span>rover systems on show</span></li>
+      <li><b>5</b><span>subteams</span></li>
+    </ul>
+  </section>
+
+  <main>
+    <!-- ============ ROVER VIEWER ============ -->
+    <section id="rover" class="rover-sec" aria-labelledby="rsTitle">
+      <svg class="wave wave-top" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0,110 L0,64 Q720,-44 1440,64 L1440,110 Z"/></svg>
+
+      <div class="container rs-head reveal">
+        <p class="eyebrow ink"><span class="bar"></span>The Rover</p>
+        <h2 id="rsTitle" class="serif rs-title">Watch it come together.</h2>
+        <p class="rs-sub">Each system starts pulled apart, then assembles piece by piece. Use the arrows to move between the rover, the arm, and the science module, or drag the slider to take it apart yourself.</p>
+      </div>
+
+      <div class="rv" id="roverViewer"></div>
+      <noscript><p class="container center">Turn on JavaScript to see the rover assembly videos.</p></noscript>
+
+      <svg class="wave wave-bottom" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0,110 L0,64 Q720,-44 1440,64 L1440,110 Z"/></svg>
+    </section>
+
+    <!-- ticker band (filled by script.js from the URC missions) -->
+    <div class="ticker" aria-hidden="true"><div class="tk-track" id="tkTrack"></div></div>
+
+    <!-- ============ OUR GOAL / TEAM ============ -->
+    <section id="team" class="space-section goal">
+      <div class="container narrow center reveal">
+        <h2 class="serif">Our Goal</h2>
+        <p class="lead">At BILL-EE, our mission is to guide STEM students through the often-overlooked complexities of initiating and advancing engineering projects across various fields like Biology, Mechanical, Electrical, and Software Engineering. We provide comprehensive guidance on a wide range of engineering concepts, from fundamental aspects such as understanding motor curves and choosing the right motor to more advanced topics like structural analysis and software algorithm optimization.</p>
+        <p class="small-italic">Our goal is to demystify the 'hidden iceberg' of engineering challenges, offering students the knowledge and tools they need to succeed in their STEM endeavors.</p>
+        <div class="btn-row center">
+          <a class="btn" href="#resources">Resources</a>
+          <a class="btn ghost" data-link="joinForm" href="#contact" target="_blank" rel="noopener">Join the team</a>
+        </div>
+      </div>
+
+      <div class="container leads-wrap">
+        <header class="sec-head center reveal">
+          <p class="eyebrow"><span class="bar"></span>Our Team</p>
+          <h2 class="serif">Meet the leads</h2>
+          <p class="muted sec-sub">Five subteams build the rover: mechanical, operations, science, hardware, and software.</p>
+        </header>
+        <div class="lead-grid" id="leadGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ URC ============ -->
+    <section id="urc" class="space-section urc">
+      <div class="container">
+        <header class="sec-head center reveal">
+          <p class="eyebrow"><span class="bar"></span>The Challenge</p>
+          <h2 class="serif">University Rover Challenge</h2>
+        </header>
+
+        <div class="urc-grid">
+          <div class="urc-main reveal">
+            <h3 class="serif">What is URC?</h3>
+            <p>The Mars Society's University Rover Challenge challenges students to build remotely operated rovers that can accomplish a variety of tasks that might one day assist astronauts working on the surface of Mars.</p>
+            <p class="muted">Rovers will compete in four missions:</p>
+          </div>
+          <figure class="urc-photo reveal">
+            <img id="urcPhoto" src="assets/urc-scene.jpg" alt="A rover on the surface of Mars at sunset (illustration)" data-fallback="missing" />
+            <figcaption id="urcCap">University Rover Challenge</figcaption>
+          </figure>
+        </div>
+
+        <div class="mission-grid" id="missionGrid"></div>
+
+        <div class="urc-cols">
+          <article class="info-card reveal">
+            <h3 class="serif">Why URC?</h3>
+            <p>We chose URC as our stepping stone because of its fascinating challenges, allowing us to explore our robotic expertise in various industries (such as biotechnical, mechanical, electrical, artificial intelligence, etc).</p>
+          </article>
+          <article class="info-card reveal">
+            <h3 class="serif">How do students benefit?</h3>
+            <p>Team members learn professional technical skills and other useful tools like CAD and ECAD software, composites 3D printing, electronics, power tools, manufacturing, and assembling methods that can be directly applied to the workforce.</p>
+          </article>
+        </div>
+
+        <div class="urc-video reveal" id="sar">
+          <header class="center">
+            <p class="eyebrow"><span class="bar"></span>URC 2026 &middot; System Acceptance Review</p>
+            <h3 class="serif">Watch our SAR video</h3>
+            <p class="muted sar-cap" id="sarCap"></p>
+          </header>
+          <div class="video-frame" id="urcVideo">
+            <div class="vf-empty">
+              <svg viewBox="0 0 24 24" width="54" height="54" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M10 8.5l6 3.5-6 3.5z" fill="currentColor" stroke="none"/></svg>
+              <strong>SAR video goes here</strong>
+              <small>Set <code>urcVideo</code> in <code>site-config.js</code> to a file in <code>assets</code> or a YouTube link</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row center">
+          <a class="btn" data-link="urcWebsite" href="#" target="_blank" rel="noopener">Visit the URC website</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TEAM MOMENT (collage) ============ -->
+    <section id="gallery" class="moments">
+      <div class="moments-bg" id="momentsBg" aria-hidden="true"></div>
+      <div class="moments-shade" id="momentsShade" aria-hidden="true"></div>
+      <div class="container">
+        <header class="sec-head center reveal">
+          <p class="eyebrow"><span class="bar"></span>In the lab</p>
+          <h2 class="serif">Team Moment</h2>
+          <p class="sec-sub">Late nights, test drives, and everything in between. Click a photo to see it larger.</p>
+        </header>
+        <div class="collage" id="collage"></div>
+      </div>
+    </section>
+
+    <!-- ============ RESOURCES ============ -->
+    <section id="resources" class="space-section resources">
+      <div class="container">
+        <header class="sec-head center reveal">
+          <p class="eyebrow"><span class="bar"></span>Open and public</p>
+          <h2 class="serif">Resources</h2>
+          <p class="muted sec-sub">Our code, our hardware documentation, and our slides.</p>
+        </header>
+        <div class="res-grid" id="resGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ JOIN / FOOTER ============ -->
+  <footer id="contact" class="footer">
+    <div class="container join reveal">
+      <div>
+        <p class="eyebrow"><span class="bar"></span>Join us</p>
+        <h2 class="serif">Want to help build a rover?</h2>
+        <p>Fill out our interest form to get involved, and follow along on Instagram for updates.</p>
+        <div class="btn-row">
+          <a class="btn" data-link="joinForm" href="#" target="_blank" rel="noopener">Fill out the interest form</a>
+        </div>
+      </div>
+      <div class="follow">
+        <a class="follow-card" data-link="instagramBillee" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          <span><b>BILL-EE Rover</b><small>@cppbilleerover</small></span>
+        </a>
+        <a class="follow-card" data-link="instagramBroncoStar" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          <span><b>Bronco STAR</b><small>@broncostar.cpp</small></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="container footer-grid">
+      <div class="footer-logos">
+        <figure class="fl-round"><img src="assets/logo.png" alt="BILL-EE" data-fallback="hide-fig" /><figcaption>BILL-EE</figcaption></figure>
+        <figure class="fl-round"><img src="assets/bronco-star-logo.png" alt="Bronco STAR" data-fallback="hide-fig" /><figcaption>Bronco STAR</figcaption></figure>
+        <img src="assets/bronco-space-logo.png" alt="Bronco Space" data-fallback="hide" />
+        <img src="assets/cpp-logo.png" alt="Cal Poly Pomona" data-fallback="hide" />
+      </div>
+      <div class="disclaimer">
+        <h3 class="serif">Disclaimer:</h3>
+        <p>This page is developed and maintained by a student organization, and is not approved or endorsed by, affiliated with, or supported by the University. The University does not screen or control the content on this page and thus does not guarantee the accuracy, integrity, or quality of it. The views expressed here are strictly those of the page authors. Questions or comments on the contents of this page should be directed to the applicable student organization.</p>
+        <div class="btn-row"><a class="btn ghost" data-link="disclaimerLearnMore" href="#" target="_blank" rel="noopener">Learn More</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- photo viewer for the collage -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button class="lb-close" id="lbClose" aria-label="Close photo">&times;</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
+    <figure>
+      <img id="lbImg" alt="" />
+      <figcaption id="lbCap"></figcaption>
+    </figure>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">&#8250;</button>
+  </div>
+
+  <!-- section rail and mission readout (desktop only; built by script.js) -->
+  <nav class="rail" id="rail" aria-label="Page sections"></nav>
+  <div class="hud" id="hud" aria-hidden="true">
+    <span class="hud-dot"></span><span>MET <b id="hudClock">00:00:00</b></span><span class="hud-sep"></span><span>34.0589&deg;N 117.8211&deg;W</span><span class="hud-sep"></span><b id="hudSec">HOME</b>
+  </div>
+
+  <script src="site-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

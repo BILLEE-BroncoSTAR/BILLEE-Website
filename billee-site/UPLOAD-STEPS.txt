@@ -1,0 +1,52 @@
+BILL-EE SITE: FULL UPDATE (v3.1)
+==============================
+This zip holds a folder called  billee-site  with the whole site:
+index.html, styles.css, script.js, site-config.js, README.md and assets/.
+Uploading replaces files that have the same name and keeps everything else
+in your repo (hero-bg.jpg, bronco-space-logo.png, cpp-logo.png are untouched).
+NEW in this version: logo.png and bronco-star-logo.png are cleaned-up versions of the Instagram logos, and the SAR video is a link card.
+
+BEFORE YOU START
+  Unzip the download. Open the unzipped folder, then open the  billee-site  folder inside it.
+
+STEP 1: upload the 5 files next to index.html
+  1. On GitHub open your repo, then click the  billee-site  folder (the one with index.html).
+  2. Add file > Upload files.
+  3. Drag in these 5 files from the unzipped billee-site folder:
+       index.html, styles.css, script.js, site-config.js, README.md
+  4. Check the path at the top of the page reads:  YOURREPO / billee-site /
+  5. Click Commit changes.
+
+STEP 2: upload the assets
+  1. In the repo open  billee-site, then  assets.
+  2. Add file > Upload files.
+  3. Drag in the 9 files that are directly inside assets:
+       the 3 .mp4 files, the 3 -poster.jpg files, logo.png, bronco-star-logo.png, urc-scene.jpg
+     Check the path reads  YOURREPO / billee-site / assets /   then Commit changes.
+  4. Open  billee-site / assets  again, click Add file > Upload files, and drag in the
+     folder called  leads  (it holds the 4 lead photos). Check the path, then Commit.
+  5. Do the same for the folder called  collage  (the 9 filler photos).
+  (If you already uploaded the leads and collage folders last time, you can skip 4 and 5.)
+
+  If you can't find the Add file button, use these links (put in your username and repo):
+     https://github.com/YOURUSERNAME/YOURREPO/upload/main/billee-site
+     https://github.com/YOURUSERNAME/YOURREPO/upload/main/billee-site/assets
+  (If it says not found, try  master  instead of  main.)
+
+  Faster way: open your repo and press the period key (.) to open the online editor.
+  Drag the contents of the unzipped billee-site folder into the billee-site folder in the
+  left file list, click the branching icon on the left, type a message, then Commit & Push.
+
+STEP 3: check it
+  Vercel redeploys in about a minute. Open your site and hard refresh (Ctrl+Shift+R or Cmd+Shift+R).
+  Look for: the two logos in the top bar, the SAR video card (opens YouTube) in the URC section, and a
+  photo beside "What is URC?" (an illustration with a small caption means the photo link did not load).
+
+CLEAN UP (optional)
+  These are no longer used: urc-habitat.jpg and the old rover-exploded / arm-exploded /
+  science-exploded files. Open each in GitHub, click the three dots, and Delete file.
+  Same for any files you uploaded by mistake outside the billee-site folder.
+
+STILL TO ADD (optional)
+  assets/team-bg.jpg   moving background behind the photo collage
+  Your real photos over assets/collage/photo-01.jpg ... photo-09.jpg (same file names)
