@@ -55,6 +55,15 @@ window.SITE_CONFIG = {
     youtubeLabel: "Watch our SAR 2027 video",
 
     eyebrow: "Cal Poly Pomona  ·  Bronco STAR",
+    // Shown in the home screen readout and the footer.
+    coordinates: "34.0589° N  117.8211° W",
+    place: "Cal Poly Pomona, California",
+    // The numbers along the bottom of the home screen.
+    stats: [
+      { value: "4", label: "URC missions" },
+      { value: "3", label: "Main subsystems" },
+      { value: "5", label: "Subteams" },
+    ],
     title: "BILL-EE",
     tagline: "Cal Poly Pomona's Mars rover team, competing in the University Rover Challenge.",
   },
@@ -66,7 +75,10 @@ window.SITE_CONFIG = {
     paragraphs: [
       "BILL-EE is an enthusiastic team of undergraduate STEM students from Cal Poly Pomona operating under Bronco STAR, an Instructionally Related Activity (IRA) Organization. Each year, we build a robotic Mars Rover to compete in the University Rover Challenge (URC) and grow students’ technical skills in various STEM fields (engineering, biology, geology, etc.) Our goal is to develop the next generation of Mars rovers while fostering students’ fascination for space robotics. Our team includes individuals from a large variety of disciplines, including engineering, biology, computer science, and business.",
     ],
-    teamPhoto: "assets/img/team-2026.jpg",
+    // "Our Goal" box under the about text ("" to hide)
+    goalTitle: "Our Goal",
+    goal: "At BILL-EE, our mission is to guide STEM students through the often-overlooked complexities of initiating and advancing engineering projects across various fields like Biology, Mechanical, Electrical, and Software Engineering. Our goal is to demystify the 'hidden iceberg' of engineering challenges, offering students the knowledge and tools they need to succeed in their STEM endeavors.",
+    teamPhoto: "img/team-2026.jpg",
     teamPhotoAlt: "The BILL-EE team with the rover and the Bronco STAR flag in front of a campus building",
   },
 
@@ -78,6 +90,8 @@ window.SITE_CONFIG = {
      note:   small line under the video (leave "" for none)
      --------------------------------------------------------------- */
   roverSpeed: 0.6, // 1 = normal speed, 0.5 = half speed
+  // Label shown on every exploded-view video
+  explodedLabel: "Exploded view · 2024 rover model",
 
   subsystems: [
     {
@@ -124,7 +138,7 @@ window.SITE_CONFIG = {
       video: "assets/science-assemble.mp4",
       poster: "assets/science-assemble-poster.jpg",
       photo: drive("1UDfHRGeZON_HTvl0ZlXXtYSb28gj8RWC"),
-      note: "Exploded view: the sample collection (auger drill) module.",
+      note: "The exploded view shows the sample collection (auger drill) module from the 2024 model.",
       paragraphs: [
         "The science module searches for signs of life. It is made up of three parts: sample collection, sample analysis, and the UV box.",
       ],
@@ -140,7 +154,7 @@ window.SITE_CONFIG = {
 
   /* ---------------------------------------------------------------
      SUBTEAMS (tabs). Each one has its leads inside it.
-     Lead photo: "assets/leads/name.jpg"  (leave "" for a blank photo)
+     Lead photo: "leads/name.jpg"  (leave "" for a blank photo)
      --------------------------------------------------------------- */
   subteams: [
     {
@@ -153,7 +167,7 @@ window.SITE_CONFIG = {
         "Support the other subteams through mechanical design",
       ],
       leads: [
-        { name: "Justin Chang", role: "Mechanical Lead", photo: "" },
+        { name: "Joshua Dang", role: "Mechanical Lead", photo: "leads/joshua-dang.jpg" },
       ],
       links: [
         { label: "Fusion 360 CAD repository", href: "", soon: true },
@@ -170,7 +184,7 @@ window.SITE_CONFIG = {
         "Wiring harnesses for the inside of the rover",
       ],
       leads: [
-        { name: "Luca Lanzillotta", role: "Hardware Lead", photo: "assets/leads/luca-lanzillotta.jpg" },
+        { name: "Luca Lanzillotta", role: "Hardware Lead", photo: "leads/luca-lanzillotta.jpg" },
       ],
       links: [
         { label: "Hardware repository on GitHub", href: "https://github.com/BILLEE-BroncoSTAR/billee-hardware-2027" },
@@ -187,7 +201,7 @@ window.SITE_CONFIG = {
         "More complex arm behavior using inverse kinematics",
       ],
       leads: [
-        { name: "Luca Lanzillotta", role: "Software Lead", photo: "assets/leads/luca-lanzillotta.jpg" },
+        { name: "Luca Lanzillotta", role: "Software Lead", photo: "leads/luca-lanzillotta.jpg" },
         { name: "Veronica Diaz", role: "Software Consultant", photo: "" },
       ],
       links: [
@@ -206,8 +220,7 @@ window.SITE_CONFIG = {
         "Refine the sample rotation system and the UV spectroscopy unit",
       ],
       leads: [
-        { name: "Joshua Dang", role: "Science Lead", photo: "assets/leads/joshua-dang.jpg" },
-        { name: "Josh Sandkulla", role: "Science Lead", photo: "assets/leads/josh-sandkulla.jpg" },
+        { name: "Josh Sandkulla", role: "Science Lead", photo: "leads/josh-sandkulla.jpg" },
       ],
       // The science mission, step by step (shown as a numbered list).
       missionSteps: [
@@ -236,7 +249,7 @@ window.SITE_CONFIG = {
         "Lay the groundwork for future teams",
       ],
       leads: [
-        { name: "Caitlyn Alba", role: "Operations Lead", photo: "assets/leads/caitlyn-alba.jpg" },
+        { name: "Caitlyn Alba", role: "Operations Lead", photo: "leads/caitlyn-alba.jpg" },
       ],
       links: [],
     },

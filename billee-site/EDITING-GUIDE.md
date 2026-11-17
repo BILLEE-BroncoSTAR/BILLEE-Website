@@ -12,7 +12,7 @@ Rules for editing `site-config.js`:
 | To change... | Look for this in `site-config.js` |
 |---|---|
 | A lead's name, title, or photo | `subteams:` then the team's `leads:` list |
-| A blank lead photo | Set `photo: "assets/leads/firstname-lastname.jpg"` after uploading the photo to `assets/leads/` (about 4:5, portrait) |
+| A blank lead photo | Set `photo: "leads/firstname-lastname.jpg"` after uploading the photo to the `leads/` folder (about 4:5, portrait) |
 | Rover descriptions | `subsystems:` then `paragraphs:` and `specs:` |
 | About text or team photo | `about:` |
 | Gallery photos | `gallery:` (one line per photo) |
@@ -22,7 +22,7 @@ Rules for editing `site-config.js`:
 ## Adding photos
 
 Two options:
-1. **Upload to the repo:** put the file in `assets/img/` and write `"assets/img/your-file.jpg"`.
+1. **Upload to the repo:** put the file in the `img/` folder and write `"img/your-file.jpg"`.
 2. **Use Google Drive:** write `drive("FILE_ID")`. The FILE_ID is the long code in a Drive link (`drive.google.com/file/d/FILE_ID/view`). The file must be shared as "Anyone with the link". The gallery photos currently load this way from the team Drive, so don't move or un-share those files.
 
 ## Adding the SAR 2027 video to the home screen
@@ -46,8 +46,18 @@ When the Fusion repo is public, put its link in two places: the Mechanical team'
 - `index.html`: page structure (rarely needs edits)
 - `styles.css`: colors, fonts, layout. The brand colors are at the top under `:root`.
 - `script.js`: builds the page from the config. No need to edit.
-- `assets/fonts/science-gothic.woff2`: the Science Gothic font (SIL Open Font License), self-hosted.
-- `assets/logos/`: cleaned-up logos. `bronco-star-logo-with-motto.png` is the original, unused.
+- `fonts/science-gothic.woff2`: the Science Gothic font (SIL Open Font License), self-hosted.
+- `logos/`: cleaned-up logos. `bronco-star-logo-with-motto.png` is the original, unused.
+- `leads/`: team lead photos. `img/`: team photo.
+- `assets/`: the exploded-view videos and their posters.
+- No longer used (safe to delete): `assets/leads/`, `assets/collage/`, `assets/logo.png`, `assets/bronco-star-logo.png`, `assets/urc-scene.jpg`, `README.md`, `UPLOAD-STEPS.txt`.
+
+## Other settings
+
+- `hero.coordinates` / `hero.place`: the Cal Poly Pomona readout on the home screen and footer.
+- `hero.stats`: the numbers along the bottom of the home screen.
+- `explodedLabel`: the label on the exploded-view videos ("2024 rover model").
+- `about.goal`: the "Our Goal" box.
 
 ## Phones
 

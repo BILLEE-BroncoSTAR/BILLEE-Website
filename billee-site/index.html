@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BILL-EE | Cal Poly Pomona Mars Rover Team</title>
   <meta name="description" content="BILL-EE is Cal Poly Pomona's undergraduate Mars rover team, operating under Bronco STAR and competing in the University Rover Challenge." />
-  <meta name="theme-color" content="#0e1116" />
+  <meta name="theme-color" content="#07080d" />
   <meta property="og:title" content="BILL-EE | Cal Poly Pomona Mars Rover Team" />
   <meta property="og:description" content="Undergraduate students at Cal Poly Pomona building a Mars rover for the University Rover Challenge." />
-  <meta property="og:image" content="assets/img/team-2026-1200.jpg" />
-  <link rel="icon" type="image/png" href="assets/logos/favicon-64.png" />
-  <link rel="apple-touch-icon" href="assets/logos/favicon-180.png" />
-  <link rel="preload" href="assets/fonts/science-gothic.woff2" as="font" type="font/woff2" crossorigin />
+  <meta property="og:image" content="img/team-2026-1200.jpg" />
+  <link rel="icon" type="image/png" href="logos/favicon-64.png" />
+  <link rel="apple-touch-icon" href="logos/favicon-180.png" />
+  <link rel="preload" href="fonts/science-gothic.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -22,7 +22,7 @@
   <header class="site-header" id="header">
     <div class="wrap header-row">
       <a class="brand" href="#top" aria-label="BILL-EE, back to top">
-        <img src="assets/logos/billee-logo-512.png" alt="" width="58" height="40" />
+        <img src="logos/billee-logo-512.png" alt="" width="58" height="40" />
         <span>BILL-EE</span>
       </a>
 
@@ -38,10 +38,10 @@
 
       <div class="social">
         <a data-link="instagramBillee" href="#" target="_blank" rel="noopener" aria-label="BILL-EE on Instagram" title="@cppbilleerover">
-          <img src="assets/logos/billee-logo-512.png" alt="" width="26" height="18" />
+          <img src="logos/billee-logo-512.png" alt="" width="26" height="18" />
         </a>
         <a data-link="instagramBroncoStar" href="#" target="_blank" rel="noopener" aria-label="Bronco STAR on Instagram" title="@broncostar.cpp">
-          <img src="assets/logos/bronco-star-logo-400.png" alt="" width="24" height="24" />
+          <img src="logos/bronco-star-logo-400.png" alt="" width="24" height="24" />
         </a>
       </div>
 
@@ -55,20 +55,34 @@
   <section class="hero" id="top">
     <div class="hero-media" id="heroMedia" aria-hidden="true"></div>
     <div class="hero-shade" aria-hidden="true"></div>
+
     <div class="wrap hero-content">
-      <img class="hero-logo" src="assets/logos/billee-logo.png" alt="BILL-EE logo" width="1030" height="711" />
-      <div class="hero-text">
-        <p class="eyebrow" id="heroEyebrow"></p>
-        <h1 id="heroTitle">BILL-EE</h1>
-        <p class="hero-tagline" id="heroTagline"></p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href="#rover">See the rover</a>
-          <a class="btn btn-light" href="#contact">Contact us</a>
-          <a class="btn btn-light" id="heroYoutube" href="#" target="_blank" rel="noopener" hidden></a>
+      <p class="readout" aria-label="Location">
+        <span class="dot" aria-hidden="true"></span>
+        <span id="heroCoords"></span>
+        <span class="sep" aria-hidden="true"></span>
+        <span id="heroPlace"></span>
+      </p>
+
+      <div class="hero-main">
+        <img class="hero-logo" src="logos/billee-logo.png" alt="BILL-EE logo" width="1030" height="711" />
+        <div class="hero-text">
+          <p class="eyebrow" id="heroEyebrow"></p>
+          <h1 id="heroTitle">BILL-EE</h1>
+          <p class="hero-tagline" id="heroTagline"></p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#rover">See the rover</a>
+            <a class="btn btn-glass" href="#contact">Contact us</a>
+            <a class="btn btn-glass" id="heroYoutube" href="#" target="_blank" rel="noopener" hidden></a>
+          </div>
         </div>
       </div>
+
+      <ul class="stats" id="heroStats" aria-label="At a glance"></ul>
     </div>
   </section>
+
+  <div class="spectrum" aria-hidden="true"></div>
 
   <main>
 
@@ -77,17 +91,24 @@
       <div class="wrap about-grid">
         <div class="about-text">
           <p class="kicker">About BILL-EE</p>
-          <h2>Students building the next generation of Mars rovers.</h2>
+          <h2>Students building the next generation of <span class="grad">Mars rovers.</span></h2>
           <div id="aboutText"></div>
         </div>
         <figure class="about-photo">
           <img id="teamPhoto" alt="" loading="lazy" />
         </figure>
       </div>
+      <div class="wrap">
+        <aside class="goal" id="goalBox" hidden>
+          <h3 id="goalTitle"></h3>
+          <p id="goalText"></p>
+          <img src="logos/bronco-star-logo-400.png" alt="Bronco STAR" width="84" height="84" />
+        </aside>
+      </div>
     </section>
 
     <!-- ========== THE ROVER ========== -->
-    <section class="section section-alt" id="rover">
+    <section class="section section-raised" id="rover">
       <div class="wrap">
         <header class="section-head">
           <p class="kicker">The Rover</p>
@@ -111,7 +132,7 @@
     </section>
 
     <!-- ========== URC ========== -->
-    <section class="section section-dark" id="urc">
+    <section class="section section-mars" id="urc">
       <div class="wrap">
         <header class="section-head">
           <p class="kicker">The Competition</p>
@@ -123,17 +144,18 @@
             <h3>What is URC?</h3>
             <p id="urcWhat"></p>
             <p class="urc-sub">Rovers compete in four missions:</p>
-            <ol class="missions" id="urcMissions"></ol>
           </div>
           <figure class="urc-photo"><img id="urcPhoto" alt="The BILL-EE rover outdoors" loading="lazy" /></figure>
         </div>
 
+        <ol class="missions" id="urcMissions"></ol>
+
         <div class="urc-cols">
-          <div>
+          <div class="card">
             <h3>Why URC?</h3>
             <p id="urcWhy"></p>
           </div>
-          <div>
+          <div class="card">
             <h3>How do students benefit?</h3>
             <p id="urcBenefit"></p>
           </div>
@@ -141,7 +163,7 @@
 
         <div class="btn-row">
           <a class="btn btn-primary" data-link="urcWebsite" href="#" target="_blank" rel="noopener">Official URC website</a>
-          <a class="btn btn-outline-light" data-link="sarVideo2026" href="#" target="_blank" rel="noopener">Watch our 2026 SAR video</a>
+          <a class="btn btn-glass" data-link="sarVideo2026" href="#" target="_blank" rel="noopener">Watch our 2026 SAR video</a>
         </div>
       </div>
     </section>
@@ -158,7 +180,7 @@
     </section>
 
     <!-- ========== RESOURCES ========== -->
-    <section class="section section-alt" id="resources">
+    <section class="section section-raised" id="resources">
       <div class="wrap">
         <header class="section-head">
           <p class="kicker">Open Source</p>
@@ -171,29 +193,31 @@
 
     <!-- ========== CONTACT ========== -->
     <section class="section contact" id="contact">
-      <div class="wrap contact-grid">
-        <div>
-          <p class="kicker">Contact Us</p>
-          <h2>Get in touch.</h2>
-          <p class="contact-lead">Questions, sponsorship, or interested in joining? Email the team or fill out our interest form.</p>
-        </div>
-        <div class="contact-list">
-          <a class="contact-item" id="emailLink" href="#">
-            <span class="ci-label">Email</span>
-            <span class="ci-value" id="emailText"></span>
-          </a>
-          <a class="contact-item" data-link="interestForm" href="#" target="_blank" rel="noopener">
-            <span class="ci-label">Interest form</span>
-            <span class="ci-value">Google Form</span>
-          </a>
-          <a class="contact-item" data-link="instagramBillee" href="#" target="_blank" rel="noopener">
-            <span class="ci-label">Instagram</span>
-            <span class="ci-value">@cppbilleerover</span>
-          </a>
-          <a class="contact-item" data-link="instagramBroncoStar" href="#" target="_blank" rel="noopener">
-            <span class="ci-label">Instagram</span>
-            <span class="ci-value">@broncostar.cpp</span>
-          </a>
+      <div class="wrap">
+        <div class="contact-card">
+          <div>
+            <p class="kicker">Contact Us</p>
+            <h2>Get in touch.</h2>
+            <p class="contact-lead">Questions, sponsorship, or interested in joining? Email the team or fill out our interest form.</p>
+          </div>
+          <div class="contact-list">
+            <a class="contact-item" id="emailLink" href="#">
+              <span class="ci-label">Email</span>
+              <span class="ci-value" id="emailText"></span>
+            </a>
+            <a class="contact-item" data-link="interestForm" href="#" target="_blank" rel="noopener">
+              <span class="ci-label">Interest form</span>
+              <span class="ci-value">Google Form</span>
+            </a>
+            <a class="contact-item" data-link="instagramBillee" href="#" target="_blank" rel="noopener">
+              <span class="ci-label">Instagram</span>
+              <span class="ci-value">@cppbilleerover</span>
+            </a>
+            <a class="contact-item" data-link="instagramBroncoStar" href="#" target="_blank" rel="noopener">
+              <span class="ci-label">Instagram</span>
+              <span class="ci-value">@broncostar.cpp</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -201,10 +225,11 @@
 
   <!-- ========== FOOTER ========== -->
   <footer class="footer">
+    <div class="spectrum" aria-hidden="true"></div>
     <div class="wrap footer-grid">
       <div class="footer-brand">
-        <img src="assets/logos/billee-logo-512.png" alt="BILL-EE" width="120" height="83" />
-        <img src="assets/logos/bronco-star-logo-400.png" alt="Bronco STAR" width="72" height="72" />
+        <img src="logos/billee-logo-512.png" alt="BILL-EE" width="120" height="83" />
+        <img src="logos/bronco-star-logo-400.png" alt="Bronco STAR" width="72" height="72" />
         <img id="cppLogo" alt="Cal Poly Pomona" class="cpp" hidden />
       </div>
       <div class="disclaimer">
@@ -214,6 +239,7 @@
     </div>
     <div class="wrap footer-base">
       <span>&copy; <span id="year"></span> BILL-EE, Cal Poly Pomona</span>
+      <span class="footer-coords" id="footCoords"></span>
       <a href="#top">Back to top</a>
     </div>
   </footer>

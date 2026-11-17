@@ -16,6 +16,31 @@
   function initials(name) {
     return (name || "?").split(/\s+/).map(function (w) { return w.charAt(0); }).slice(0, 2).join("").toUpperCase();
   }
+  /* Photos hosted on Google (Drive / Photos) must be requested without the
+     visitor's Google login or the page address, or Google can refuse them. */
+  function isRemote(src) { return /^https?:\/\//.test(src || "") && src.indexOf(location.host) === -1; }
+  function prep(img, src) {
+    if (!isRemote(src)) return;
+    img.referrerPolicy = "no-referrer";
+    /* Drive photos also load without cookies; Google Photos album links do not allow that */
+    if (/googleusercontent\.com\/d\//.test(src)) img.crossOrigin = "anonymous";
+    else img.removeAttribute("crossorigin");
+  }
+  function setSrc(img, src, onFail) {
+    prep(img, src);
+    var tries = 0;
+    img.addEventListener("error", function retry() {
+      if (tries === 0 && /googleusercontent\.com/.test(src)) {
+        tries = 1;
+        setTimeout(function () { img.src = src.replace(/=w(\d+)/, function (m, w) { return "=w" + (+w + 1); }); }, 600);
+        return;
+      }
+      img.removeEventListener("error", retry);
+      if (onFail) onFail();
+    });
+    img.src = src;
+    return img;
+  }
   /* bigger version of a Google-hosted photo for the photo viewer */
   function large(src) { return /googleusercontent\.com/.test(src) ? src.replace(/=w\d+.*$/, "=w2400") : src; }
   function sized(src, w) { return /googleusercontent\.com/.test(src) ? src.replace(/=w\d+.*$/, "=w" + w) : src; }
@@ -35,7 +60,7 @@
     if (img.complete && !img.naturalWidth) hide(); else img.addEventListener("error", hide);
   });
   $("year").textContent = new Date().getFullYear();
-  if (cfg.cppLogo) { $("cppLogo").src = cfg.cppLogo; $("cppLogo").hidden = false; }
+  if (cfg.cppLogo) { $("cppLogo").hidden = false; setSrc($("cppLogo"), cfg.cppLogo, function () { $("cppLogo").hidden = true; }); }
 
   /* ---------- header + mobile menu ---------- */
   var header = $("header"), nav = $("nav"), menuBtn = $("menuBtn");
@@ -66,10 +91,19 @@
       v.src = h.videoFile;
       media.appendChild(v);
     } else if (h.image) {
-      var img = new Image();
-      img.onload = function () { media.style.backgroundImage = "url('" + img.src + "')"; media.classList.add("loaded"); };
-      img.src = mqMobile.matches ? sized(h.image, 1200) : h.image;
+      var img = new Image(); img.alt = ""; img.decoding = "async";
+      img.onload = function () { media.classList.add("loaded"); };
+      setSrc(img, mqMobile.matches ? sized(h.image, 1400) : h.image);
+      media.appendChild(img);
     }
+    $("heroCoords").textContent = h.coordinates || "";
+    $("heroPlace").textContent = h.place || "";
+    if (!h.coordinates && !h.place) document.querySelector(".readout").hidden = true;
+    $("footCoords").textContent = h.coordinates ? h.coordinates + "  ·  " + (h.place || "") : "";
+    (h.stats || []).forEach(function (st) {
+      var li = el("li"); li.appendChild(el("b", "", st.value)); li.appendChild(el("span", "", st.label));
+      $("heroStats").appendChild(li);
+    });
     if (h.youtube) {
       var yt = $("heroYoutube");
       yt.href = h.youtube; yt.textContent = h.youtubeLabel || "Watch the video"; yt.hidden = false;
@@ -80,8 +114,9 @@
   (function about() {
     var a = cfg.about || {};
     (a.paragraphs || []).forEach(function (p) { $("aboutText").appendChild(el("p", "", p)); });
-    if (a.teamPhoto) { $("teamPhoto").src = a.teamPhoto; $("teamPhoto").alt = a.teamPhotoAlt || "The BILL-EE team"; }
+    if (a.teamPhoto) { $("teamPhoto").alt = a.teamPhotoAlt || "The BILL-EE team"; setSrc($("teamPhoto"), a.teamPhoto, function () { $("teamPhoto").parentNode.hidden = true; }); }
     else $("teamPhoto").parentNode.hidden = true;
+    if (a.goal) { $("goalTitle").textContent = a.goalTitle || "Our Goal"; $("goalText").textContent = a.goal; $("goalBox").hidden = false; }
   })();
 
   /* ---------- tabs helper ---------- */
@@ -160,13 +195,15 @@
         v.addEventListener("ended", function () { replay.hidden = false; });
         v.addEventListener("error", function () { media.classList.add("no-video"); });
         vwrap.appendChild(v); vwrap.appendChild(replay);
+        if (cfg.explodedLabel) vwrap.appendChild(el("span", "model-chip", cfg.explodedLabel));
         videos[i] = v;
       } else { media.classList.add("no-video"); }
       media.appendChild(vwrap);
 
       if (s.photo) {
         var ph = el("div", "sys-photo");
-        var im = new Image(); im.alt = s.title || ""; im.loading = "lazy"; im.src = sized(s.photo, 1000);
+        var im = new Image(); im.alt = s.title || ""; im.loading = "lazy";
+        setSrc(im, sized(s.photo, 1000), function () { ph.hidden = true; });
         ph.appendChild(im); media.appendChild(ph);
       }
       if (s.note) media.appendChild(el("p", "sys-note", s.note));
@@ -219,8 +256,8 @@
     var c = el("figure", "lead");
     var ph = el("div", "lead-photo");
     if (l.photo) {
-      var im = new Image(); im.alt = l.name || ""; im.loading = "lazy"; im.src = l.photo;
-      im.addEventListener("error", function () { im.remove(); ph.appendChild(el("span", "ini", initials(l.name))); });
+      var im = new Image(); im.alt = l.name || ""; im.loading = "lazy";
+      setSrc(im, l.photo, function () { im.remove(); ph.classList.add("blank"); ph.appendChild(el("span", "ini", initials(l.name))); });
       ph.appendChild(im);
     } else {
       ph.classList.add("blank");
@@ -307,12 +344,13 @@
     $("urcWhy").textContent = u.why || "";
     $("urcBenefit").textContent = u.benefit || "";
     (u.missions || []).forEach(function (m) {
-      var li = el("li");
+      var li = el("li", "m" + ((u.missions.indexOf(m) % 4) + 1));
       li.appendChild(el("strong", "", m.name));
       li.appendChild(el("span", "", m.text));
       $("urcMissions").appendChild(li);
     });
-    if (u.photo) $("urcPhoto").src = sized(u.photo, 1000); else $("urcPhoto").parentNode.hidden = true;
+    if (u.photo) setSrc($("urcPhoto"), sized(u.photo, 1000), function () { $("urcPhoto").parentNode.hidden = true; });
+    else $("urcPhoto").parentNode.hidden = true;
   })();
 
   /* ---------- gallery + photo viewer ---------- */
@@ -322,13 +360,13 @@
     var shown = [];
     items.forEach(function (src) {
       var b = el("button", "shot"); b.type = "button"; b.setAttribute("aria-label", "Open photo");
-      var im = new Image(); im.alt = ""; im.loading = "lazy"; im.decoding = "async"; im.src = sized(src, 900);
-      im.addEventListener("error", function () { b.remove(); shown = shown.filter(function (s) { return s !== src; }); });
+      var im = new Image(); im.alt = ""; im.loading = "lazy"; im.decoding = "async";
+      setSrc(im, sized(src, 900), function () { b.remove(); shown = shown.filter(function (s) { return s !== src; }); });
       b.appendChild(im);
       b.addEventListener("click", function () { open(shown.indexOf(src)); });
       grid.appendChild(b); shown.push(src);
     });
-    function show(i) { cur = (i + shown.length) % shown.length; lbImg.src = large(shown[cur]); }
+    function show(i) { cur = (i + shown.length) % shown.length; var u = large(shown[cur]); prep(lbImg, u); lbImg.src = u; }
     function open(i) { last = document.activeElement; show(i); lb.hidden = false; document.body.classList.add("no-scroll"); $("lbClose").focus(); }
     function close() { lb.hidden = true; lbImg.removeAttribute("src"); document.body.classList.remove("no-scroll"); if (last) last.focus(); }
     $("lbClose").addEventListener("click", close);
