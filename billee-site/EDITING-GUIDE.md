@@ -54,10 +54,10 @@ When the Fusion repo is public, put its link in two places: the Mechanical team'
 
 ## Other settings
 
-- `hero.coordinates` / `hero.place`: the Cal Poly Pomona readout on the home screen and footer.
-- `hero.stats`: the numbers along the bottom of the home screen.
+- `hero.coordinates` / `hero.place`: the Cal Poly Pomona coordinates in the footer.
+- `hero.stats`: the numbers in the band below the About section.
 - `explodedLabel`: the label on the exploded-view videos ("2024 rover model").
-- `about.goal`: the "Our Goal" box.
+- `roverSpeed`: keep at 1. Slower speeds make the exploded views look choppy.
 
 ## Phones
 

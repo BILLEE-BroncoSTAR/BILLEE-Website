@@ -55,10 +55,10 @@ window.SITE_CONFIG = {
     youtubeLabel: "Watch our SAR 2027 video",
 
     eyebrow: "Cal Poly Pomona  ·  Bronco STAR",
-    // Shown in the home screen readout and the footer.
+    // Shown in the footer.
     coordinates: "34.0589° N  117.8211° W",
     place: "Cal Poly Pomona, California",
-    // The numbers along the bottom of the home screen.
+    // The numbers in the band below the About section.
     stats: [
       { value: "4", label: "URC missions" },
       { value: "3", label: "Main subsystems" },
@@ -75,9 +75,6 @@ window.SITE_CONFIG = {
     paragraphs: [
       "BILL-EE is an enthusiastic team of undergraduate STEM students from Cal Poly Pomona operating under Bronco STAR, an Instructionally Related Activity (IRA) Organization. Each year, we build a robotic Mars Rover to compete in the University Rover Challenge (URC) and grow students’ technical skills in various STEM fields (engineering, biology, geology, etc.) Our goal is to develop the next generation of Mars rovers while fostering students’ fascination for space robotics. Our team includes individuals from a large variety of disciplines, including engineering, biology, computer science, and business.",
     ],
-    // "Our Goal" box under the about text ("" to hide)
-    goalTitle: "Our Goal",
-    goal: "At BILL-EE, our mission is to guide STEM students through the often-overlooked complexities of initiating and advancing engineering projects across various fields like Biology, Mechanical, Electrical, and Software Engineering. Our goal is to demystify the 'hidden iceberg' of engineering challenges, offering students the knowledge and tools they need to succeed in their STEM endeavors.",
     teamPhoto: "img/team-2026.jpg",
     teamPhotoAlt: "The BILL-EE team with the rover and the Bronco STAR flag in front of a campus building",
   },
@@ -89,7 +86,7 @@ window.SITE_CONFIG = {
      photo:  shown instead of the video on phones
      note:   small line under the video (leave "" for none)
      --------------------------------------------------------------- */
-  roverSpeed: 0.6, // 1 = normal speed, 0.5 = half speed
+  roverSpeed: 1, // 1 = normal speed (slower speeds make the video look choppy)
   // Label shown on every exploded-view video
   explodedLabel: "Exploded view · 2024 rover model",
 
@@ -102,14 +99,14 @@ window.SITE_CONFIG = {
       photo: drive("1Hreyd1vK6uZbs7_x_3jDTThXFlH3hQUv"),
       note: "",
       paragraphs: [
-        "The rover base is a rocker-bogie suspension with six-wheel drive. It carried over from last season with only minor changes, since it had already proven reliable, which let the team put its time into the arm and science systems.",
-        "The bogie positions were set to keep the center of gravity low with the robotic arm mounted, so the rover stays stable even with the arm fully extended. The chassis is made of Aluminum Composite Material (ACM) panels on an aluminum T-slot frame, which makes it easy to mount new modules.",
+        "Our lightweight rocker-bogie suspension and dust-resistant chassis body carried over from last season, with minor modifications to mount the new subsystems.",
+        "The bogie positions keep the center of gravity low with the robotic arm mounted, so the rover stays stable even with the arm fully extended. The drivetrain uses ODESC V4.2 drivers and NEO motors that talk to the Jetson over CAN. Motor calibration and tuning are done with our own drivetrain software, and the rover is driven through ROS 2 with an Xbox controller.",
       ],
       specs: [
         "Rocker-bogie suspension, six-wheel drive",
-        "Each wheel driven by a NEO brushless motor and its own ODESC controller",
-        "ACM panels on an aluminum T-slot frame",
-        "Tested over rocks, plants, logs, and curbs",
+        "ODESC V4.2 drivers with NEO brushless motors over CAN",
+        "Dust-resistant chassis: ACM panels on an aluminum T-slot frame",
+        "Driven through ROS 2 with an Xbox controller",
       ],
       missions: ["Delivery", "Autonomy"],
     },
@@ -121,14 +118,14 @@ window.SITE_CONFIG = {
       photo: drive("1lYWRYY2zDn3LJm6oR-o65BExkiJMs-kC"),
       note: "",
       paragraphs: [
-        "The arm was redesigned from the ground up for 2026, except for the first axis drive. It has five degrees of freedom and was designed around strength, weight, and dexterity. Carbon fiber replaced last year's aluminum structure, and the mounts are printed in carbon-fiber-filled PPA.",
-        "The wrist uses a differential gearbox with custom 3D-printed helical bevel gears, which fixed last year's gear slippage. The new three-finger gripper closes to a point, so it can also press buttons on a keyboard.",
+        "The arm is built from two roll-wrapped carbon fiber tubes with custom 3D-printed PPA-CF mounts. Carbon fiber's strength-to-weight ratio keeps the arm light but strong enough to lift 5 kg.",
+        "The second and third axis motors produce up to 182 and 86 N·m, and their harmonic reducers have a reverse backlash of only 15 arcseconds. Internal brakes save energy and hold the arm upright if power is lost. A 3D-printed differential gearbox moves the wrist in pitch and roll with minimal backlash, and the new three-point-contact claw grips securely enough to connect hoses and plug in cables.",
       ],
       specs: [
-        "5 degrees of freedom, folds compactly when stowed",
-        "Axes 2 and 3: up to 182 N·m and 86 N·m of torque",
-        "Harmonic reducers with 15 arcsecond backlash",
-        "Rated to lift objects up to 10 kg",
+        "5 degrees of freedom with a differential wrist",
+        "Axes 2 and 3: up to 182 N·m and 86 N·m",
+        "Harmonic reducers with 15 arcsecond backlash and internal brakes",
+        "Motion planning in ROS 2 guided by computer vision, for tasks like typing on a keyboard",
       ],
       missions: ["Equipment Servicing", "Delivery"],
     },
@@ -138,14 +135,14 @@ window.SITE_CONFIG = {
       video: "assets/science-assemble.mp4",
       poster: "assets/science-assemble-poster.jpg",
       photo: drive("1UDfHRGeZON_HTvl0ZlXXtYSb28gj8RWC"),
-      note: "The exploded view shows the sample collection (auger drill) module from the 2024 model.",
+      note: "",
       paragraphs: [
-        "The science module searches for signs of life. It is made up of three parts: sample collection, sample analysis, and the UV box.",
+        "The science module looks for signs of life two ways: testing soil samples for lipids, and imaging rocks under UV light.",
       ],
       parts: [
-        { name: "Sample collection", text: "An auger drill collects soil from 10 cm down, below the layer exposed to UV radiation, and deposits it into a sealable cache." },
-        { name: "Sample analysis", text: "Lipids are extracted with isopropyl alcohol, pumped into cuvettes on a rotating stage, and dyed with Sudan III. A Vernier spectrophotometer (380 to 950 nm) then checks for the absorbance peak that shows lipids are present." },
-        { name: "UV box", text: "A folding bellows encloses a rock in complete darkness, and a camera records its UV fluorescence to look for carbonate and magnetite structures." },
+        { name: "Sample collection", text: "An auger drill and its platform descend to dig 10 cm below the surface, and the soil is deposited into a sealable cache." },
+        { name: "Sample analysis", text: "The cache is flooded with isopropyl alcohol and Sudan III, a dye that dissolves in fats rather than water. The mix is stirred magnetically and sent to the spectrophotometer to be analyzed for lipids. A Geneva-gear sample rotation system holds up to four cuvettes, so we can collect both baseline and sample data." },
+        { name: "UV spectroscopy", text: "A curtain descends over a rock and encloses it in complete darkness. The box shines UVA and UVB light and takes a picture, which is analyzed for magnetite and carbonate structures left by magnetotactic bacteria and water. The bellows folding mechanism was improved this year for faster deployment." },
       ],
       specs: [],
       missions: ["Astrobiology"],
@@ -160,14 +157,14 @@ window.SITE_CONFIG = {
     {
       name: "Mechanical",
       excerpt: "The Mechanical Team designs, develops, and builds many of the rover’s main subsystems, including the suspension, chassis, and robotic arm. Students on this team gain hands-on experience with CAD and manufacturing.",
-      urc: "Mechanical builds the hardware the rover uses in every mission: a suspension that can cross the Utah terrain for the Delivery and Autonomy missions, and a robotic arm that can do the dexterous tasks in Equipment Servicing.",
+      urc: "Mechanical builds the hardware the rover uses in every mission: a lightweight rocker-bogie suspension and dust-resistant chassis that cross the Utah terrain, and a carbon fiber robotic arm with a three-point claw for the dexterous tasks in Equipment Servicing.",
       focus: [
         "Redesign the first axis of the robotic arm",
         "Refine the gripper to complete all SAR claw tasks",
         "Support the other subteams through mechanical design",
       ],
       leads: [
-        { name: "Joshua Dang", role: "Mechanical Lead", photo: "leads/joshua-dang.jpg" },
+        { name: "Justin Chang", role: "Mechanical Lead", photo: "leads/joshua-dang.jpg" },
       ],
       links: [
         { label: "Fusion 360 CAD repository", href: "", soon: true },
@@ -176,7 +173,7 @@ window.SITE_CONFIG = {
     {
       name: "Hardware",
       excerpt: "The Hardware Team handles all of BILL-EE’s electrical systems, designing a modular, all-in-one solution to power and control the rover as well as developing the communications and ground station. Students on this team learn schematic design, PCB design, and firmware programming.",
-      urc: "Every mission depends on hardware: reliable power to each subsystem, a long-range radio link between the rover and the ground station, and controls for the arm and science instruments.",
+      urc: "This season we rebuilt the power delivery system from the ground up, modularized subsystem control, and streamlined how the subsystems interface with each other. Every subsystem talks to the main compute unit, an NVIDIA Jetson Orin AGX, so we can manage power sequencing, read thermocouples and IMU data, and control everything remotely through ROS 2. Power is protected by a kill switch and logic-level relays, across three battery systems: logic, drivetrain, and arm and science. Two Ubiquiti AC Bullet radios give a point-to-point link to the ground station, and a u-blox ZED-F9P GNSS module provides precise positioning.",
       focus: [
         "Rover Control Module: a custom PCB that powers every subsystem from four battery packs, running NASA JPL's F´ (F Prime) flight software on an RP2350",
         "Science Control Module on a Teensy 4.1, also running F´",
@@ -193,7 +190,7 @@ window.SITE_CONFIG = {
     {
       name: "Software",
       excerpt: "The Software Team programs the controls for each of the rover’s subsystems and develops autonomous behavior. Students on this team learn various programming languages, including C++, Python, and FPrime, as well as the implementation of ROS2.",
-      urc: "Software drives the rover from the ground station in every mission and runs the Autonomy mission on its own: fusing GPS and IMU data, planning routes with Nav2, and finding its targets with the depth camera.",
+      urc: "With more compute power this year, our ROS 2 stack streams six concurrent camera feeds to a new Foxglove operator interface. Autonomy builds on our Nav2 stack with an outdoor-optimized ZED camera for longer, more detailed cost maps. Full physics and control simulations in Gazebo let us develop the arm and navigation code while the hardware is still being built, and arm motion planning uses computer vision feedback for tasks like typing on a keyboard and picking up objects.",
       focus: [
         "ROS 2 Humble workspace with a full Gazebo simulation of the rover",
         "Drivetrain control over CAN, ZED 2i perception, and Foxglove operator views",
@@ -212,7 +209,7 @@ window.SITE_CONFIG = {
     {
       name: "Science",
       excerpt: "The Science Team, split into two smaller teams: Science-Mechanical and Science-Research, focuses on developing the life detection modules necessary to detect the presence of life on Mars. Students on this team learn about the composition of Mars, experimental design, and the intersection between science and engineering.",
-      urc: "Science is responsible for the Astrobiology mission: investigating field sites for evidence of life, analyzing samples on board the rover, and returning a sealed sample cache.",
+      urc: "Science is responsible for the Astrobiology mission: investigating field sites for evidence of life, analyzing samples on board the rover, and returning a sealed sample cache. We use two life-detection methods, lipid detection with a spectrophotometer and UV spectroscopy of rocks.",
       focus: [
         "Integrate last season's science developments onto the rover",
         "Refine soil transfer from the drill to the sample caches",
@@ -225,10 +222,10 @@ window.SITE_CONFIG = {
       // The science mission, step by step (shown as a numbered list).
       missionSteps: [
         "Drill 10 cm into the soil and deposit the sample into a sealable cache.",
-        "Mix the soil with isopropyl alcohol for five minutes to extract lipids.",
-        "Pump the extract into cuvettes on the sample rotation system and add Sudan III dye.",
+        "Flood the cache with isopropyl alcohol and Sudan III dye, then mix it with a magnetic stirrer.",
+        "Move the sample into a cuvette on the Geneva-gear rotation system, alongside a baseline.",
         "Measure absorbance with the spectrophotometer. A peak near 580 nm indicates lipids.",
-        "Enclose rock samples in the UV box and image their fluorescence for carbonates and magnetites.",
+        "Enclose a rock in the UV box, light it with UVA and UVB, and image it for magnetite and carbonate structures.",
       ],
       // Optional: a video of the science module running its procedure.
       //   "assets/science-procedure.mp4"  or a YouTube link

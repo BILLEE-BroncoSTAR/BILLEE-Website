@@ -57,12 +57,6 @@
     <div class="hero-shade" aria-hidden="true"></div>
 
     <div class="wrap hero-content">
-      <p class="readout" aria-label="Location">
-        <span class="dot" aria-hidden="true"></span>
-        <span id="heroCoords"></span>
-        <span class="sep" aria-hidden="true"></span>
-        <span id="heroPlace"></span>
-      </p>
 
       <div class="hero-main">
         <img class="hero-logo" src="logos/billee-logo.png" alt="BILL-EE logo" width="1030" height="711" />
@@ -78,7 +72,6 @@
         </div>
       </div>
 
-      <ul class="stats" id="heroStats" aria-label="At a glance"></ul>
     </div>
   </section>
 
@@ -98,21 +91,19 @@
           <img id="teamPhoto" alt="" loading="lazy" />
         </figure>
       </div>
-      <div class="wrap">
-        <aside class="goal" id="goalBox" hidden>
-          <h3 id="goalTitle"></h3>
-          <p id="goalText"></p>
-          <img src="logos/bronco-star-logo-400.png" alt="Bronco STAR" width="84" height="84" />
-        </aside>
-      </div>
     </section>
+
+    <!-- ========== AT A GLANCE ========== -->
+    <div class="stats-band">
+      <ul class="wrap stats" id="heroStats" aria-label="At a glance"></ul>
+    </div>
 
     <!-- ========== THE ROVER ========== -->
     <section class="section section-raised" id="rover">
       <div class="wrap">
         <header class="section-head">
           <p class="kicker">The Rover</p>
-          <h2>3 Main Subsystems</h2>
+          <h2>Main Subsystems</h2>
         </header>
         <div class="tabs" role="tablist" aria-label="Rover subsystems" id="roverTabs"></div>
         <div id="roverPanels"></div>

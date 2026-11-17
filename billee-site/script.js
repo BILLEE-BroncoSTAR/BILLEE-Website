@@ -38,6 +38,9 @@
       img.removeEventListener("error", retry);
       if (onFail) onFail();
     });
+    img.classList.add("fade");
+    if (img.complete && img.naturalWidth) img.classList.add("is-loaded");
+    else img.addEventListener("load", function () { img.classList.add("is-loaded"); }, { once: true });
     img.src = src;
     return img;
   }
@@ -93,12 +96,9 @@
     } else if (h.image) {
       var img = new Image(); img.alt = ""; img.decoding = "async";
       img.onload = function () { media.classList.add("loaded"); };
-      setSrc(img, mqMobile.matches ? sized(h.image, 1400) : h.image);
+      setSrc(img, mqMobile.matches ? sized(h.image, 1600) : sized(h.image, 2560));
       media.appendChild(img);
     }
-    $("heroCoords").textContent = h.coordinates || "";
-    $("heroPlace").textContent = h.place || "";
-    if (!h.coordinates && !h.place) document.querySelector(".readout").hidden = true;
     $("footCoords").textContent = h.coordinates ? h.coordinates + "  ·  " + (h.place || "") : "";
     (h.stats || []).forEach(function (st) {
       var li = el("li"); li.appendChild(el("b", "", st.value)); li.appendChild(el("span", "", st.label));
@@ -116,7 +116,7 @@
     (a.paragraphs || []).forEach(function (p) { $("aboutText").appendChild(el("p", "", p)); });
     if (a.teamPhoto) { $("teamPhoto").alt = a.teamPhotoAlt || "The BILL-EE team"; setSrc($("teamPhoto"), a.teamPhoto, function () { $("teamPhoto").parentNode.hidden = true; }); }
     else $("teamPhoto").parentNode.hidden = true;
-    if (a.goal) { $("goalTitle").textContent = a.goalTitle || "Our Goal"; $("goalText").textContent = a.goal; $("goalBox").hidden = false; }
+
   })();
 
   /* ---------- tabs helper ---------- */
@@ -203,7 +203,7 @@
       if (s.photo) {
         var ph = el("div", "sys-photo");
         var im = new Image(); im.alt = s.title || ""; im.loading = "lazy";
-        setSrc(im, sized(s.photo, 1000), function () { ph.hidden = true; });
+        setSrc(im, sized(s.photo, 1400), function () { ph.hidden = true; });
         ph.appendChild(im); media.appendChild(ph);
       }
       if (s.note) media.appendChild(el("p", "sys-note", s.note));
@@ -349,7 +349,7 @@
       li.appendChild(el("span", "", m.text));
       $("urcMissions").appendChild(li);
     });
-    if (u.photo) setSrc($("urcPhoto"), sized(u.photo, 1000), function () { $("urcPhoto").parentNode.hidden = true; });
+    if (u.photo) setSrc($("urcPhoto"), sized(u.photo, 1400), function () { $("urcPhoto").parentNode.hidden = true; });
     else $("urcPhoto").parentNode.hidden = true;
   })();
 
@@ -358,10 +358,10 @@
     var items = (cfg.gallery || []).filter(Boolean);
     var grid = $("galleryGrid"), lb = $("lightbox"), lbImg = $("lbImg"), cur = 0, last = null;
     var shown = [];
-    items.forEach(function (src) {
+    items.forEach(function (src, n) {
       var b = el("button", "shot"); b.type = "button"; b.setAttribute("aria-label", "Open photo");
       var im = new Image(); im.alt = ""; im.loading = "lazy"; im.decoding = "async";
-      setSrc(im, sized(src, 900), function () { b.remove(); shown = shown.filter(function (s) { return s !== src; }); });
+      setSrc(im, sized(src, n % 7 === 0 ? 1800 : 1000), function () { b.remove(); shown = shown.filter(function (s) { return s !== src; }); });
       b.appendChild(im);
       b.addEventListener("click", function () { open(shown.indexOf(src)); });
       grid.appendChild(b); shown.push(src);
