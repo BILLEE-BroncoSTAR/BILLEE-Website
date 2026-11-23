@@ -198,6 +198,14 @@ img.fade.is-loaded { opacity: 1; }
 .about-photo::after { content: ""; position: absolute; inset: auto -14px -14px auto; width: 45%; height: 45%; border-radius: var(--radius); background: var(--grad); z-index: -1; opacity: .85; }
 .about-photo { z-index: 0; }
 .about-photo img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); background: var(--panel); box-shadow: 0 30px 60px -30px rgba(0,0,0,.8); }
+.team-years { position: absolute; left: 14px; top: 14px; display: flex; gap: 6px; }
+.year-btn {
+  font: inherit; font-size: 12px; font-weight: 700; font-stretch: 120%; letter-spacing: .06em;
+  color: #fff; background: rgba(7,8,13,.82); border: 0; padding: 6px 12px; border-radius: 999px; cursor: pointer;
+  transition: background-color .15s;
+}
+.year-btn:hover { background: rgba(7,8,13,.95); }
+.year-btn[aria-pressed="true"] { background: var(--grad); }
 
 
 /* ---------- tabs (shared) ---------- */
@@ -277,7 +285,7 @@ img.fade.is-loaded { opacity: 1; }
 .lead-grid.two { grid-template-columns: 1fr 1fr; }
 .lead { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .lead-photo { aspect-ratio: 4 / 5; overflow: hidden; background: var(--panel-2); position: relative; }
-.lead-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.lead-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .lead-photo.blank { display: grid; place-items: center; background: radial-gradient(circle at 50% 35%, #232737, #12141e 70%); }
 .lead-photo .ini { font-size: 46px; font-weight: 800; font-stretch: 130%; color: rgba(255,255,255,.28); }
 .lead figcaption { padding: 14px 16px 16px; border-top: 3px solid; border-image: var(--grad) 1; }
@@ -320,6 +328,13 @@ img.fade.is-loaded { opacity: 1; }
 .shot:hover img { transform: scale(1.04); }
 .shot:hover::after { box-shadow: inset 0 0 0 2px var(--orange); }
 .shot:nth-child(7n + 1) { grid-column: span 2; grid-row: span 2; }
+.gallery-years { display: grid; gap: 44px; }
+.gallery-year-label {
+  display: flex; align-items: center; gap: 14px; margin: 0 0 16px;
+  font-size: 22px; font-stretch: 115%; letter-spacing: .04em;
+}
+.gallery-year-label::after { content: ""; flex: 1; height: 1px; background: var(--line-2); }
+.sys-still img { width: 100%; height: 100%; object-fit: contain; background: #fff; display: block; }
 
 .lightbox { position: fixed; inset: 0; z-index: 90; background: rgba(4,5,8,.95); display: flex; align-items: center; justify-content: center; padding: 56px 72px; }
 .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }

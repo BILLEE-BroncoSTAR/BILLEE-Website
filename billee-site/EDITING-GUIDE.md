@@ -14,8 +14,8 @@ Rules for editing `site-config.js`:
 | A lead's name, title, or photo | `subteams:` then the team's `leads:` list |
 | A blank lead photo | Set `photo: "leads/firstname-lastname.jpg"` after uploading the photo to the `leads/` folder (about 4:5, portrait) |
 | Rover descriptions | `subsystems:` then `paragraphs:` and `specs:` |
-| About text or team photo | `about:` |
-| Gallery photos | `gallery:` (one line per photo) |
+| About text or team photos | `about:` (`teamPhotos:` has one line per year; the first one shows first, the year buttons on the photo switch between them) |
+| Gallery photos | `gallery:` (grouped by year; one line per photo inside each year's `photos:` list. To add a year, copy a `{ year: ..., photos: [...] },` block) |
 | Repos and documents | `resources:` and each team's `links:` |
 | Email, interest form, Instagram | `links:` at the top |
 
@@ -56,6 +56,7 @@ When the Fusion repo is public, put its link in two places: the Mechanical team'
 
 - `hero.coordinates` / `hero.place`: the Cal Poly Pomona coordinates in the footer.
 - `hero.stats`: the numbers in the band below the About section.
+- `still`: in `subsystems:`, shows one image instead of an exploded-view video (the Science Module uses `assets/science-module.jpg`). To go back to the video, delete `still` and add `video` and `poster` again.
 - `explodedLabel`: the label on the exploded-view videos ("2024 rover model").
 - `roverSpeed`: keep at 1. Slower speeds make the exploded views look choppy.
 

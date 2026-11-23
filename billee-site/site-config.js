@@ -75,8 +75,12 @@ window.SITE_CONFIG = {
     paragraphs: [
       "BILL-EE is an enthusiastic team of undergraduate STEM students from Cal Poly Pomona operating under Bronco STAR, an Instructionally Related Activity (IRA) Organization. Each year, we build a robotic Mars Rover to compete in the University Rover Challenge (URC) and grow students’ technical skills in various STEM fields (engineering, biology, geology, etc.) Our goal is to develop the next generation of Mars rovers while fostering students’ fascination for space robotics. Our team includes individuals from a large variety of disciplines, including engineering, biology, computer science, and business.",
     ],
-    teamPhoto: "img/team-2026.jpg",
-    teamPhotoAlt: "The BILL-EE team with the rover and the Bronco STAR flag in front of a campus building",
+    // Team photos by year. The first one shows first; visitors switch
+    // years with the buttons under the photo. Add or remove lines freely.
+    teamPhotos: [
+      { year: "2026", photo: "img/team-2026.jpg", alt: "The 2026 BILL-EE team with the rover and the Bronco STAR flag in front of a campus building" },
+      { year: "2024", photo: "https://lh3.googleusercontent.com/pw/AP1GczPGwO1mOHCORlNNLjiPWJbMvhSozLK56RF5tQMgXvoGuMUpuy9jWctxhOvSQMfgpX-N_mVD8sgAwkQDzxFVpOOaQFTERiboZX91foVbsGRnDQebuWk=w1600", alt: "The 2024 BILL-EE team holding the team flag" },
+    ],
   },
 
   /* ---------------------------------------------------------------
@@ -120,9 +124,9 @@ window.SITE_CONFIG = {
     {
       tab: "Science Module",
       title: "Science Module",
-      video: "assets/science-assemble.mp4",
-      poster: "assets/science-assemble-poster.jpg",
-      photo: drive("1UDfHRGeZON_HTvl0ZlXXtYSb28gj8RWC"),
+      // still: one image of the module, shown instead of an exploded-view video
+      still: "assets/science-module.jpg",
+      photo: "assets/science-module.jpg",
       note: "",
       paragraphs: [
         "The science module looks for signs of life two ways: testing soil samples for lipids, and imaging rocks under UV light.",
@@ -161,12 +165,13 @@ window.SITE_CONFIG = {
     {
       name: "Hardware",
       excerpt: "The Hardware Team handles all of BILL-EE’s electrical systems, designing a modular, all-in-one solution to power and control the rover as well as developing the communications and ground station. Students on this team learn schematic design, PCB design, and firmware programming.",
-      urc: "This season we rebuilt the power delivery system from the ground up, modularized subsystem control, and streamlined how the subsystems interface with each other. Every subsystem talks to the main compute unit, an NVIDIA Jetson Orin AGX, so we can manage power sequencing, read thermocouples and IMU data, and control everything remotely through ROS 2. Power is protected by a kill switch and logic-level relays, across three battery systems: logic, drivetrain, and arm and science. Two Ubiquiti AC Bullet radios give a point-to-point link to the ground station, and a u-blox ZED-F9P GNSS module provides precise positioning.",
+      urc: "This season the rover’s electronics are built around a known-state architecture: every device on the rover has a predetermined hard state, on or off, that can be changed through a web server. A Raspberry Pi 4B is now the main system computer, handling subsystem power sequencing and direct control of the drivetrain and robotic arm. It is supported by an NVIDIA Jetson, which takes on the compute-heavy work: image processing, autonomous functions, video encoding, and command processing. The Jetson receives the video feeds from the rover’s cameras, encodes and packetizes them, and sends them to the Raspberry Pi to be hosted on the web server.",
       focus: [
-        "Rover Control Module: a custom PCB that powers every subsystem from four battery packs, running NASA JPL's F´ (F Prime) flight software on an RP2350",
-        "Science Control Module on a Teensy 4.1, also running F´",
+        "Raspberry Pi 4B as the main computer: power sequencing, drivetrain, and arm control",
+        "Known-state architecture: every device switched on or off from the Raspberry Pi’s web server",
+        "NVIDIA Jetson for image processing, autonomy, video encoding, and command processing",
+        "Multi-camera video feeds encoded on the Jetson and hosted on the web server",
         "Point-to-point Ubiquiti radio link to the ground station",
-        "Wiring harnesses for the inside of the rover",
       ],
       leads: [
         { name: "Luca Lanzillotta", role: "Hardware Lead", photo: "leads/luca-lanzillotta.jpg" },
@@ -178,12 +183,13 @@ window.SITE_CONFIG = {
     {
       name: "Software",
       excerpt: "The Software Team programs the controls for each of the rover’s subsystems and develops autonomous behavior. Students on this team learn various programming languages, including C++, Python, and FPrime, as well as the implementation of ROS2.",
-      urc: "With more compute power this year, our ROS 2 stack streams six concurrent camera feeds to a new Foxglove operator interface. Autonomy builds on our Nav2 stack with an outdoor-optimized ZED camera for longer, more detailed cost maps. Full physics and control simulations in Gazebo let us develop the arm and navigation code while the hardware is still being built, and arm motion planning uses computer vision feedback for tasks like typing on a keyboard and picking up objects.",
+      urc: "The software system continues to run on the ROS 2 ecosystem. This season development is containerized, so several members can work on the code at the same time and their work integrates more smoothly. The team now has dedicated laptops for development and for the base station instead of relying on personal devices. The rover’s main processing system is upgraded to an NVIDIA Jetson AGX Orin, which makes room for more complex autonomous algorithms and more operator views.",
       focus: [
-        "ROS 2 Humble workspace with a full Gazebo simulation of the rover",
-        "Drivetrain control over CAN, ZED 2i perception, and Foxglove operator views",
-        "Improve autonomous navigation: waypoints and obstacle avoidance",
-        "More complex arm behavior using inverse kinematics",
+        "Containerized ROS 2 development so members can build and test at the same time",
+        "Dedicated development and base station laptops",
+        "More complex autonomous algorithms on the Jetson AGX Orin",
+        "More operator views from the rover’s cameras",
+        "Rover software simulations in ROS 2 before full system tests",
       ],
       leads: [
         { name: "Luca Lanzillotta", role: "Software Lead", photo: "leads/luca-lanzillotta.jpg" },
@@ -257,34 +263,60 @@ window.SITE_CONFIG = {
   },
 
   /* ---------------------------------------------------------------
-     GALLERY: no captions. Add, remove, or reorder lines freely.
+     GALLERY: grouped by year, newest first. No captions.
+     Add, remove, or reorder lines freely inside each year's photos.
      --------------------------------------------------------------- */
   gallery: [
-    drive("14GFTUrm0rWwUGHnXDplwrpMROf_QGcqy"),
-    drive("1oZXSOWnfT-KkQmqITG2IkBmNSgWMpU8A"),
-    drive("1lYWRYY2zDn3LJm6oR-o65BExkiJMs-kC"),
-    drive("1U0UChw4HKRit4kKwPKzjKUMFQFr5TmSp"),
-    drive("1ICVol5rg73wo385A6WGFgUaL6Qw9MDdh"),
-    drive("1Hreyd1vK6uZbs7_x_3jDTThXFlH3hQUv"),
-    drive("1AmvtLqihac2BlJ7vWqYxUP721VC9nr_4"),
-    drive("1UDfHRGeZON_HTvl0ZlXXtYSb28gj8RWC"),
-    drive("1hWHtQmlwqmy948lMEkZI5UFfBGN7fMN5"),
-    drive("1SbdTm13dqi9ZCYSZqx_SY5tKwvOdp_0W"),
-    drive("1TN3021cLkHdofwha3A8RizEW3yztSu4R"),
-    drive("1_jgdPe7EFA4HFytrCqE-t1WrbGVaJI2T"),
-    drive("19MKbJtRWUcZct9i9Ylgd9ZmxoGDLovF_"),
-    drive("1mhqNtKNk_yydIZ2gJ9oz9rzI16QpJrWZ"),
-    drive("1nZ6WDIjoNZ-1OBGxItGUTKNJvJXbUzt0"),
-    drive("1LPaxIIw5qZVH55C3SY3wdKom3qf-NQNJ"),
-    drive("12PUAiZahf87SYj66MVRJfbkY9vxmIfGu"),
-    drive("1m-llGlTCySJ5HdS4SDd4Ja4Wez8mKClK"),
-    // 2023-2024 season (URC Photos 2023-2024 album)
-    "https://lh3.googleusercontent.com/pw/AP1GczPGwO1mOHCORlNNLjiPWJbMvhSozLK56RF5tQMgXvoGuMUpuy9jWctxhOvSQMfgpX-N_mVD8sgAwkQDzxFVpOOaQFTERiboZX91foVbsGRnDQebuWk=w1600",
-    "https://lh3.googleusercontent.com/pw/AP1GczPMsZ-tfUWxoYbys8w9mhXgFzaIbazCYQJxgMhtfKcfaZzSloJ9y6m6guY65F4hJkZk4y1DoDKpqOAXJtZYXELv_LgSdoUXn9MmBDwh74boXFBveVo=w1600",
-    "https://lh3.googleusercontent.com/pw/AP1GczMlniKdVGMm_J3KOqy9JCe8Pn1Jw1ox_54P1CkdG2r4pSCIBxEbSC1sXewBTT_F-7nmQK4nDikBzkKWgVOue5kHg3aLlrPn1uzxL_y8agi4vwqcqhw=w1600",
-    "https://lh3.googleusercontent.com/pw/AP1GczN4EJ6T7JhLXuLU5_6-efrnS1VKFc0NgVwebtugdDDVplyUKw75CyF5p2vuGgUQr-elHtknz11P0_vJrxA2VYQ-gWJ3DC0DEoiVOIfrF6mBCK7kWVo=w1600",
-    "https://lh3.googleusercontent.com/pw/AP1GczPE4xtTcutU7-j-I7h01VcNCQU_LDxR70TC7seLcvY3AKnhX59NuetIXp0mhl7fwRExwqvrCN6JtGWRRY4-Z6ia-c1qoLG3pN_akBnNxjW-DdehUNw=w1600",
-    "https://lh3.googleusercontent.com/pw/AP1GczN6RP_GADQn7mkp0EYcZTTeBy5AdKFst03on8CrsbR5ryO1BCe4zPFN6FmzrhZTRYMC1VMLnBwxPKyEqBu4BhNqztu_gfW54JE5Bf0Kb0KX9bJAqOQ=w1600",
+    {
+      year: "2026",
+      photos: [
+        // 10/23 Build Day (2027 SAR photos folder)
+        drive("1Gnr4j3UjIHLZtDFNAYZIICHhwh_BFA7u"),
+        drive("1RPuLRgdM11yjh0HttgDT9TeE0j5sWIut"),
+        drive("14KRUlxK325MQnkkgVEuYXaiH1NQ0LtRe"),
+        drive("16O7Mg-vDhPDaO65MzRmAeUukfKGPjHg0"),
+        drive("1UqaNIW_8tAEFozwqMVJLw8KcV2Gcedxg"),
+        drive("1rpY8bqVFNNzeYSU26SZ1OClihu6Oy38T"),
+        drive("1trYgp936AnGO-uqfHusl-UjMgJjVD73c"),
+        drive("15US4ojgQw-hdkC7XZ5xVse1UV9lmK9Bi"),
+        drive("1TYm3mH4u82t1-gSAOXX01nKKXlrNxuRs"),
+        drive("1dSdbrRyehrdDmIhFS66dlUyMyXrI209o"),
+        // Spring 2026
+        drive("1oZXSOWnfT-KkQmqITG2IkBmNSgWMpU8A"),
+        drive("1U0UChw4HKRit4kKwPKzjKUMFQFr5TmSp"),
+        drive("1ICVol5rg73wo385A6WGFgUaL6Qw9MDdh"),
+        drive("1Hreyd1vK6uZbs7_x_3jDTThXFlH3hQUv"),
+        drive("1UDfHRGeZON_HTvl0ZlXXtYSb28gj8RWC"),
+        drive("1hWHtQmlwqmy948lMEkZI5UFfBGN7fMN5"),
+        drive("1TN3021cLkHdofwha3A8RizEW3yztSu4R"),
+        drive("1_jgdPe7EFA4HFytrCqE-t1WrbGVaJI2T"),
+        drive("1nZ6WDIjoNZ-1OBGxItGUTKNJvJXbUzt0"),
+        drive("12PUAiZahf87SYj66MVRJfbkY9vxmIfGu"),
+        drive("1m-llGlTCySJ5HdS4SDd4Ja4Wez8mKClK"),
+      ],
+    },
+    {
+      year: "2025",
+      photos: [
+        drive("14GFTUrm0rWwUGHnXDplwrpMROf_QGcqy"),
+        drive("1lYWRYY2zDn3LJm6oR-o65BExkiJMs-kC"),
+        drive("1AmvtLqihac2BlJ7vWqYxUP721VC9nr_4"),
+        drive("1SbdTm13dqi9ZCYSZqx_SY5tKwvOdp_0W"),
+        drive("19MKbJtRWUcZct9i9Ylgd9ZmxoGDLovF_"),
+        drive("1mhqNtKNk_yydIZ2gJ9oz9rzI16QpJrWZ"),
+        drive("1LPaxIIw5qZVH55C3SY3wdKom3qf-NQNJ"),
+      ],
+    },
+    {
+      year: "2024",
+      photos: [
+        "https://lh3.googleusercontent.com/pw/AP1GczPMsZ-tfUWxoYbys8w9mhXgFzaIbazCYQJxgMhtfKcfaZzSloJ9y6m6guY65F4hJkZk4y1DoDKpqOAXJtZYXELv_LgSdoUXn9MmBDwh74boXFBveVo=w1600",
+        "https://lh3.googleusercontent.com/pw/AP1GczMlniKdVGMm_J3KOqy9JCe8Pn1Jw1ox_54P1CkdG2r4pSCIBxEbSC1sXewBTT_F-7nmQK4nDikBzkKWgVOue5kHg3aLlrPn1uzxL_y8agi4vwqcqhw=w1600",
+        "https://lh3.googleusercontent.com/pw/AP1GczN4EJ6T7JhLXuLU5_6-efrnS1VKFc0NgVwebtugdDDVplyUKw75CyF5p2vuGgUQr-elHtknz11P0_vJrxA2VYQ-gWJ3DC0DEoiVOIfrF6mBCK7kWVo=w1600",
+        "https://lh3.googleusercontent.com/pw/AP1GczPE4xtTcutU7-j-I7h01VcNCQU_LDxR70TC7seLcvY3AKnhX59NuetIXp0mhl7fwRExwqvrCN6JtGWRRY4-Z6ia-c1qoLG3pN_akBnNxjW-DdehUNw=w1600",
+        "https://lh3.googleusercontent.com/pw/AP1GczN6RP_GADQn7mkp0EYcZTTeBy5AdKFst03on8CrsbR5ryO1BCe4zPFN6FmzrhZTRYMC1VMLnBwxPKyEqBu4BhNqztu_gfW54JE5Bf0Kb0KX9bJAqOQ=w1600",
+      ],
+    },
   ],
 
   /* ---------------------------------------------------------------

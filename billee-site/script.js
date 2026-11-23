@@ -114,8 +114,29 @@
   (function about() {
     var a = cfg.about || {};
     (a.paragraphs || []).forEach(function (p) { $("aboutText").appendChild(el("p", "", p)); });
-    if (a.teamPhoto) { $("teamPhoto").alt = a.teamPhotoAlt || "The BILL-EE team"; setSrc($("teamPhoto"), a.teamPhoto, function () { $("teamPhoto").parentNode.hidden = true; }); }
-    else $("teamPhoto").parentNode.hidden = true;
+    var tp = (a.teamPhotos || []).filter(function (t) { return t && t.photo; });
+    if (!tp.length && a.teamPhoto) tp = [{ photo: a.teamPhoto, alt: a.teamPhotoAlt }];
+    var img = $("teamPhoto"), fig = img.parentNode;
+    if (!tp.length) { fig.hidden = true; return; }
+    function showTeam(i) {
+      var next = new Image(); next.id = "teamPhoto";
+      next.alt = tp[i].alt || "The BILL-EE team";
+      fig.replaceChild(next, img); img = next;
+      setSrc(img, sized(tp[i].photo, 1800), function () { if (tp.length === 1) fig.hidden = true; });
+      [].forEach.call(fig.querySelectorAll(".year-btn"), function (b, j) { b.setAttribute("aria-pressed", j === i ? "true" : "false"); });
+    }
+    if (tp.length > 1) {
+      var yrs = el("div", "team-years");
+      yrs.setAttribute("aria-label", "Team photo by year");
+      tp.forEach(function (t, i) {
+        var b = el("button", "year-btn", t.year || String(i + 1));
+        b.type = "button";
+        b.addEventListener("click", function () { showTeam(i); });
+        yrs.appendChild(b);
+      });
+      fig.appendChild(yrs);
+    }
+    showTeam(0);
 
   })();
 
@@ -197,6 +218,11 @@
         vwrap.appendChild(v); vwrap.appendChild(replay);
         if (cfg.explodedLabel) vwrap.appendChild(el("span", "model-chip", cfg.explodedLabel));
         videos[i] = v;
+      } else if (s.still) {
+        vwrap.classList.add("sys-still");
+        var st = new Image(); st.alt = s.title || ""; st.loading = "lazy";
+        setSrc(st, s.still, function () { media.classList.add("no-video"); });
+        vwrap.appendChild(st);
       } else { media.classList.add("no-video"); }
       media.appendChild(vwrap);
 
@@ -355,17 +381,34 @@
 
   /* ---------- gallery + photo viewer ---------- */
   (function gallery() {
-    var items = (cfg.gallery || []).filter(Boolean);
-    var grid = $("galleryGrid"), lb = $("lightbox"), lbImg = $("lbImg"), cur = 0, last = null;
-    var shown = [];
-    items.forEach(function (src, n) {
-      var b = el("button", "shot"); b.type = "button"; b.setAttribute("aria-label", "Open photo");
-      var im = new Image(); im.alt = ""; im.loading = "lazy"; im.decoding = "async";
-      setSrc(im, sized(src, n % 7 === 0 ? 1800 : 1000), function () { b.remove(); shown = shown.filter(function (s) { return s !== src; }); });
-      b.appendChild(im);
-      b.addEventListener("click", function () { open(shown.indexOf(src)); });
-      grid.appendChild(b); shown.push(src);
+    // gallery is a list of { year, photos: [...] } groups (a plain list of photos also works)
+    var groups = (cfg.gallery || []).filter(Boolean).map(function (g) {
+      return typeof g === "string" ? { year: "", photos: [g] } : g;
     });
+    var host = $("galleryGrid"), lb = $("lightbox"), lbImg = $("lbImg"), cur = 0, last = null;
+    var shown = [];
+    var plain = groups.every(function (g) { return !g.year; });
+    groups.forEach(function (g) {
+      var items = (g.photos || []).filter(Boolean);
+      if (!items.length) return;
+      var grid = host;
+      if (!plain) {
+        var block = el("div", "gallery-year");
+        block.appendChild(el("h3", "gallery-year-label", g.year));
+        grid = el("div", "gallery");
+        block.appendChild(grid);
+        host.appendChild(block);
+      }
+      items.forEach(function (src, n) {
+        var b = el("button", "shot"); b.type = "button"; b.setAttribute("aria-label", "Open photo" + (g.year ? " from " + g.year : ""));
+        var im = new Image(); im.alt = ""; im.loading = "lazy"; im.decoding = "async";
+        setSrc(im, sized(src, n % 7 === 0 ? 1800 : 1000), function () { b.remove(); shown = shown.filter(function (s) { return s !== src; }); });
+        b.appendChild(im);
+        b.addEventListener("click", function () { open(shown.indexOf(src)); });
+        grid.appendChild(b); shown.push(src);
+      });
+    });
+    if (!plain) host.className = "gallery-years";
     function show(i) { cur = (i + shown.length) % shown.length; var u = large(shown[cur]); prep(lbImg, u); lbImg.src = u; }
     function open(i) { last = document.activeElement; show(i); lb.hidden = false; document.body.classList.add("no-scroll"); $("lbClose").focus(); }
     function close() { lb.hidden = true; lbImg.removeAttribute("src"); document.body.classList.remove("no-scroll"); if (last) last.focus(); }
