@@ -115,12 +115,6 @@ window.SITE_CONFIG = {
         "The arm is built from two roll-wrapped carbon fiber tubes with custom 3D-printed PPA-CF mounts. Carbon fiber's strength-to-weight ratio keeps the arm light but strong enough to lift 10 kg.",
         "The second and third axis motors produce up to 182 and 86 N·m, and their harmonic reducers have a reverse backlash of only 15 arcseconds. Internal brakes save energy and hold the arm upright if power is lost. A 3D-printed differential gearbox moves the wrist in pitch and roll with minimal backlash, and the new three-point-contact claw grips securely enough to connect hoses and plug in cables.",
       ],
-      specs: [
-        "5 degrees of freedom with a differential wrist",
-        "Axes 2 and 3: up to 182 N·m and 86 N·m",
-        "Harmonic reducers with 15 arcsecond backlash and internal brakes",
-        "Motion planning in ROS 2 guided by computer vision, for tasks like typing on a keyboard",
-      ],
       missions: ["Equipment Servicing", "Delivery"],
     },
     {
