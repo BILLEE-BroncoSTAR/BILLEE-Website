@@ -102,6 +102,7 @@ window.SITE_CONFIG = {
         "Our lightweight rocker-bogie suspension and dust-resistant chassis body carried over from last season, with minor modifications to mount the new subsystems.",
         "The bogie positions keep the center of gravity low with the robotic arm mounted, so the rover stays stable even with the arm fully extended. The drivetrain uses ODESC V4.2 drivers and NEO motors that talk to the Jetson over CAN. Motor calibration and tuning are done with our own drivetrain software, and the rover is driven through ROS 2 with an Xbox controller.",
       ],
+      missions: ["Delivery", "Autonomy"],
     },
     {
       tab: "Robotic Arm",
